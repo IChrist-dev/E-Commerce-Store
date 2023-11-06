@@ -8,7 +8,6 @@
         public double Price { get; set; }
         public string Description { get; set; } = string.Empty;
         public int Runtime { get; set; }
-        public Condition Condition { get; set; } = new();
-        public int ConditionId { get; set; }
+        public string Condition { get; set; } = string.Empty;
     }
 }
