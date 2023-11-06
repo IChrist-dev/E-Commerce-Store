@@ -12,14 +12,14 @@ namespace INET_2005_Final_Project.Pages.Products
 {
     public class IndexModel : PageModel
     {
-        private readonly INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext _context;
+        private readonly INET_2005_Final_ProjectContext _context;
 
-        public IndexModel(INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext context)
+        public IList<Product> Product { get; set; } = default!;
+
+        public IndexModel(INET_2005_Final_ProjectContext context)
         {
             _context = context;
         }
-
-        public IList<Product> Product { get;set; } = default!;
 
         public async Task OnGetAsync()
         {

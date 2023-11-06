@@ -12,9 +12,15 @@ namespace INET_2005_Final_Project.Pages.Products
 {
     public class CreateModel : PageModel
     {
-        private readonly INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext _context;
+        private readonly INET_2005_Final_ProjectContext _context;
 
-        public CreateModel(INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext context)
+        [BindProperty]
+        public Product Product { get; set; } = default!;
+
+        [BindProperty]
+        public IFormFile ImageUpload { get; set; } = null!;
+
+        public CreateModel(INET_2005_Final_ProjectContext context)
         {
             _context = context;
         }
@@ -23,10 +29,7 @@ namespace INET_2005_Final_Project.Pages.Products
         {
             return Page();
         }
-
-        [BindProperty]
-        public Product Product { get; set; } = default!;
-        
+       
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()

@@ -14,13 +14,13 @@ namespace INET_2005_Final_Project.Pages.Products
     {
         private readonly INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext _context;
 
+        [BindProperty]
+        public Product Product { get; set; } = default!;
+
         public DeleteModel(INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext context)
         {
             _context = context;
         }
-
-        [BindProperty]
-      public Product Product { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

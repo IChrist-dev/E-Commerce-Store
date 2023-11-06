@@ -13,15 +13,17 @@ namespace INET_2005_Final_Project.Pages.Products
 {
     public class EditModel : PageModel
     {
-        private readonly INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext _context;
-
-        public EditModel(INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext context)
-        {
-            _context = context;
-        }
+        private readonly INET_2005_Final_ProjectContext _context;
 
         [BindProperty]
         public Product Product { get; set; } = default!;
+        [BindProperty]
+        public IFormFile? ImageUpload { get; set; } = null!;
+
+        public EditModel(INET_2005_Final_ProjectContext context)
+        {
+            _context = context;
+        }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
