@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Product.ProductId" />
             <input type="hidden" asp-for="Product.FileName" />
@@ -24,8 +24,7 @@
 
             <div class="mb-3">
                 <label asp-for="Product.FileName" class="control-label"></label>
-                <input asp-for="Product.FileName" class="form-control" />
-                <span asp-validation-for="Product.FileName" class="text-danger"></span>
+                <input type="file" asp-for="ImageUpload" class="form-control" />
             </div>
 
             <div class="mb-3">
@@ -41,9 +40,9 @@
             </div>
             
             <div class="mb-3 form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Product.isMovie" /> @Html.DisplayNameFor(model => model.Product.isMovie)
-                </label>
+                <p>Movie or Album</p>
+                @Html.RadioButtonFor(model => model.Product.isMovie, "true") Movie<br />
+                @Html.RadioButtonFor(model => model.Product.isMovie, "false") Album<br />
             </div>
             
             <div class="mb-3">
@@ -54,8 +53,9 @@
             
             <div class="mb-3">
                 <label asp-for="Product.Condition" class="control-label"></label>
-                <input asp-for="Product.Condition" class="form-control" />
-                <span asp-validation-for="Product.Condition" class="text-danger"></span>
+                <select asp-for="Product.Condition" asp-items="Model.SelectConditionList" class="form-control">
+                    <option value="">--- Select ---</option>
+                </select>
             </div>
             
             <div class="mb-3">

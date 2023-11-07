@@ -38,9 +38,9 @@
             </div>
             
             <div class="mb-3 form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Product.isMovie" /> @Html.DisplayNameFor(model => model.Product.isMovie)
-                </label>
+                <p>Movie or Album</p>
+                @Html.RadioButtonFor(model => model.Product.isMovie, "true") Movie<br />
+                @Html.RadioButtonFor(model => model.Product.isMovie, "false") Album<br />
             </div>
             
             <div class="mb-3">

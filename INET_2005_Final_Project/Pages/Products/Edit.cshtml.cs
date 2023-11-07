@@ -14,15 +14,38 @@ namespace INET_2005_Final_Project.Pages.Products
     public class EditModel : PageModel
     {
         private readonly INET_2005_Final_ProjectContext _context;
+        IWebHostEnvironment _env;
 
         [BindProperty]
         public Product Product { get; set; } = default!;
+
         [BindProperty]
         public IFormFile? ImageUpload { get; set; } = null!;
 
-        public EditModel(INET_2005_Final_ProjectContext context)
+        public List<string> ConditionList { get; set; } = new();
+
+        public List<SelectListItem> SelectConditionList { get; set; } = new();
+
+        public EditModel(INET_2005_Final_ProjectContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
+
+            // Hard-coded condition names cannot be modified
+            ConditionList.Add("Like New");
+            ConditionList.Add("Good");
+            ConditionList.Add("Fair");
+            ConditionList.Add("Some Wear");
+            ConditionList.Add("Poor");
+
+            for (int i = 0; i < ConditionList.Count; i++)
+            {
+                SelectConditionList.Add(new SelectListItem()
+                {
+                    Value = i.ToString(),
+                    Text = ConditionList[i]
+                });
+            }
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -50,25 +73,71 @@ namespace INET_2005_Final_Project.Pages.Products
                 return Page();
             }
 
-            _context.Attach(Product).State = EntityState.Modified;
+            // Convert Condition from index to simple string value
+            int selectedConditionIndex = int.Parse(Product.Condition);
+            Product.Condition = ConditionList.ElementAt(selectedConditionIndex);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(Product.ProductId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return RedirectToPage("./Index");
+            // Replace fileName in Product if a new image was provided
+            if (ImageUpload != null)
+            {
+                // Make a unique image name and set for product
+                string imageName = DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss-") + ImageUpload.FileName;
+
+                Product.FileName = imageName;
+
+                _context.Attach(Product).State = EntityState.Modified;
+
+                // Save changes to DB
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductExists(Product.ProductId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                // Assuming successful DB insert, save image file to public folder
+                string file = Path.Combine(_env.ContentRootPath, "wwwroot\\photos\\", imageName);
+
+                using (FileStream fs = new FileStream(file, FileMode.Create))
+                {
+                    ImageUpload.CopyTo(fs);
+                }
+
+                return RedirectToPage("./Index");
+            }
+            else
+            {
+                _context.Attach(Product).State = EntityState.Modified;
+
+                // Save changes to DB
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductExists(Product.ProductId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToPage("./Index");
+            }          
         }
 
         private bool ProductExists(int id)

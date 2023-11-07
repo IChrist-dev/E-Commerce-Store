@@ -13,6 +13,8 @@ namespace INET_2005_Final_Project.Models
         public string FileName { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string Description { get; set; } = string.Empty;
+        
+        [DisplayName("Media Type")]
         public bool isMovie { get; set; }
 
         [DisplayName("Runtime (m)")]
