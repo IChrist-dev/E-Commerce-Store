@@ -22,8 +22,7 @@
 
             <div class="mb-3">
                 <label asp-for="Product.FileName" class="control-label"></label>
-                <input asp-for="Product.FileName" class="form-control" />
-                <span asp-validation-for="Product.FileName" class="text-danger"></span>
+                <input type="file" asp-for="ImageUpload" class="form-control" />
             </div>
             
             <div class="mb-3">
@@ -52,8 +51,9 @@
             
             <div class="mb-3">
                 <label asp-for="Product.Condition" class="control-label"></label>
-                <input asp-for="Product.Condition" class="form-control" />
-                <span asp-validation-for="Product.Condition" class="text-danger"></span>
+                <select asp-for="Product.Condition" asp-items="Model.SelectConditionList" class="form-control">
+                    <option value="">--- Select ---</option>
+                </select>
             </div>
             
             <div class="mb-3">

@@ -39,33 +39,34 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Product) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FileName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isMovie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Runtime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Condition)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-primary">Edit</a>
-                <a asp-page="./Delete" asp-route-id="@item.ProductId" class="btn btn-primary">Delete</a>
-            </td>
-        </tr>
+    string imagePath = "/photos/" + item.FileName;
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            <img src="@imagePath" class="img-fluid thumbnail" alt="User submitted photo">
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isMovie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Runtime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Condition)
+        </td>
+        <td>
+            <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-primary">Edit</a>
+            <a asp-page="./Delete" asp-route-id="@item.ProductId" class="btn btn-primary">Delete</a>
+        </td>
+    </tr>
 }
     </tbody>
 </table>
