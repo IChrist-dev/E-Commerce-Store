@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using INET_2005_Final_Project.Data;
 using INET_2005_Final_Project.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INET_2005_Final_Project.Pages.Products
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly INET_2005_Final_ProjectContext _context;

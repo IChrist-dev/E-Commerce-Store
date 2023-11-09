@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using INET_2005_Final_Project.Data;
 using INET_2005_Final_Project.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace INET_2005_Final_Project.Pages.Products
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly INET_2005_Final_ProjectContext _context;

@@ -1,12 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using INET_2005_Final_Project.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using INET_2005_Final_Project.Pages.Admin;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<INET_2005_Final_ProjectContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("INET_2005_Final_ProjectContext") ?? throw new InvalidOperationException("Connection string 'INET_2005_Final_ProjectContext' not found.")));
+
+// Configure authentication cookie
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+        options.LoginPath = "/Admin/Login";
+        options.LogoutPath = "/Admin/Logout";
+        options.AccessDeniedPath = "/Admin/Login";
+    });
+
+
 
 var app = builder.Build();
 
@@ -23,6 +39,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Enable authentication
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
