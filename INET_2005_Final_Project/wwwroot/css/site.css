@@ -20,3 +20,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.custom-logo {
+    width: 128px;
+    height: auto;
+}
+
+.thumbnail {
+    width: 250px;
+    height: auto;
+}
+
+.description {
+    max-width: 300px;
+    text-align: justify;
+}

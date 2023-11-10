@@ -19,7 +19,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
         options.LoginPath = "/Admin/Login";
         options.LogoutPath = "/Admin/Logout";
-        options.AccessDeniedPath = "/Admin/Login";
+        options.AccessDeniedPath = "/Admin/AccessDenied";
     });
 
 
