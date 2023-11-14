@@ -52,6 +52,9 @@
         formattedIsMovie = "Album";
     }
 
+    int conditionIndex = int.Parse(item.Condition);
+    string formattedCondition = Model.ConditionList[conditionIndex];
+
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ProductName)
@@ -66,13 +69,13 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @formattedIsMovie
+            <span class="badge rounded-pill bg-secondary no-bold">@formattedIsMovie</span>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Runtime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Condition)
+            @formattedCondition
         </td>
         <td>
             <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-primary">Edit</a>

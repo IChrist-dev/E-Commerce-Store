@@ -77,8 +77,6 @@ namespace INET_2005_Final_Project.Pages.Products
 
             // Convert Condition from index to simple string value
             int selectedConditionIndex = int.Parse(Product.Condition);
-            Product.Condition = ConditionList.ElementAt(selectedConditionIndex);
-
 
             // Replace fileName in Product if a new image was provided
             if (ImageUpload != null)

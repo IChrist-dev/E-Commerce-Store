@@ -18,9 +18,18 @@ namespace INET_2005_Final_Project.Pages.Products
 
         public IList<Product> Product { get; set; } = default!;
 
+        public List<string> ConditionList { get; set; } = new();
+
         public IndexModel(INET_2005_Final_ProjectContext context)
         {
             _context = context;
+
+            // Hard-coded condition names cannot be modified
+            ConditionList.Add("Like New");
+            ConditionList.Add("Good");
+            ConditionList.Add("Fair");
+            ConditionList.Add("Some Wear");
+            ConditionList.Add("Poor");
         }
 
         public async Task OnGetAsync()
