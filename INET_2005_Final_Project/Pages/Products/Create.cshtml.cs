@@ -58,11 +58,6 @@ namespace INET_2005_Final_Project.Pages.Products
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-
-            // Convert Condition from index to simple string value
-            int selectedConditionIndex = int.Parse(Product.Condition);
-            Product.Condition = ConditionList.ElementAt(selectedConditionIndex);
-
             // Make a unique image name and set for product
             string imageName = DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss-") + ImageUpload.FileName;
 

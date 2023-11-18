@@ -1,4 +1,72 @@
 ﻿@page
 @model INET_2005_Final_Project.Pages.DetailsModel
 @{
+    ViewData["Title"] = "Details";
+
+    string imagePath = "/photos/" + Model.Product.FileName;
+
+    int conditionIndex = int.Parse(Model.Product.Condition);
+    string formattedCondition = Model.ConditionList[conditionIndex];
+
+    // Render a more readible boolean value
+    string formattedIsMovie;
+    if (Model.Product.isMovie)
+    {
+        formattedIsMovie = "Movie";
+    }
+    else
+    {
+        formattedIsMovie = "Album";
+    }
 }
+
+<h1>@Model.Product.ProductName</h1>
+
+<div class="row col-md-12">
+    <div class="col-md-6">
+        <img src="@imagePath" class="img-fluid" alt="Detail image of media"
+    </div>
+
+    <table class="table col-md-6">
+
+        <tbody>
+            <tr>
+                <td>
+                    <p>Media Type</p>
+                </td>
+                <td>
+                    <p>@formattedIsMovie</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Price:</p>
+                </td>
+                <td>
+                    <p>$@Model.Product.Price</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Condition</p>
+                </td>
+                <td>
+                    <p>@formattedCondition</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Description</p>
+                </td>
+                <td>
+                    <p>@Model.Product.Description</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

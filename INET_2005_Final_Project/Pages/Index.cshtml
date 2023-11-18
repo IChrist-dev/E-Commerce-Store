@@ -6,14 +6,16 @@
 }
 
 <div class="col-md-12 container">
-    <div class="row">
-        <div class="featured-info">
+    <div class="row featured-group banner-dimension">
+        <div class=" featured-info">
             <h1>Featured Product</h1>
             <h2>@Model.randProduct.ProductName</h2>
             <p>@Model.randProduct.Description</p>
             <a asp-page="Details" asp-route-id="@Model.randProduct.ProductId" class="featured-btn">Details</a>
         </div>
-        <img src="@featuredImage" class="featured-img" alt="Featured product image"
+        <div class="featured-img-box">
+            <img src="@featuredImage" class="featured-img" alt="Featured product image"
+        </div>
     </div>
 </div>
 
