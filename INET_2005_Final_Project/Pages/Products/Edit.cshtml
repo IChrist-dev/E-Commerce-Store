@@ -17,8 +17,6 @@
     </div>
 
     <div class="col-md-6">
-
-
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Product.ProductId" />
@@ -43,7 +41,7 @@
             
             <div class="mb-3">
                 <label asp-for="Product.Description" class="control-label"></label>
-                <input asp-for="Product.Description" class="form-control" />
+                <textarea asp-for="Product.Description" class="form-control resizable-input"></textarea>
                 <span asp-validation-for="Product.Description" class="text-danger"></span>
             </div>
             

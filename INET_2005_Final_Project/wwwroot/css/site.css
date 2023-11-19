@@ -1,5 +1,7 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -12,13 +14,22 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+body {
+    margin-bottom: 60px;
+    font-family: monospace;
 }
 
-body {
-  margin-bottom: 60px;
+h1 {
+    font-size: 4em;
+    font-family: 'Bauhaus 93';
+}
+
+h2 {
+    font-size: 3em;
+}
+
+p {
+    font-size: 1rem;
 }
 
 .custom-logo {
@@ -56,17 +67,29 @@ body {
 
 /*Home page banner image*/
 .banner {
-    z-index: -1;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/banner_record_player.png");
-    background-position: center;
+    z-index: 0;
+    object-fit: cover;
+    filter: brightness(60%);
     background-repeat: no-repeat;
-    background-size: cover;
     position: absolute;
     width: 100%;
 }
 
 .banner-dimension {
-    height: 40vh;
+    height: 500px;
+}
+
+.elevated > * {
+    z-index: 10;
+}
+
+.background-fade {
+    z-index: -1;
+    background: linear-gradient(rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%);
+}
+
+.palette-yellow {
+    background: #fca311;
 }
 
 .row .featured-group {
@@ -89,7 +112,6 @@ body {
 }
 
 .featured-btn {
-    background: #fca311;
     padding: 5px 10px;
     border-radius: 10px;
     font-size: 20px;
@@ -108,13 +130,16 @@ body {
 .featured-img-box {
     width: 50%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: auto;
+    align-content: center;
 }
 
 .featured-img {
-    width: 300px;
-    
+    width: max-content;
+    height: 500px;
+    justify-content: center;
+    padding: 20px;
 }
 
 .description {
@@ -123,23 +148,37 @@ body {
 }
 
 .card {
-    margin-top: 20px;
-    max-height: 380px;
+    margin: 30px 0;
     padding: 0;
     border-radius: 10px;
 }
 
+.movie-card {
+    height: 400px;
+}
+
+.album-card {
+    height: 340px;
+}
+
 .card-img-top {
+    border-radius: 10px 10px 0 0;
     width: 100%;
     height: auto;
-    /*max-height: 250px;*/ /*tune this better*/
 }
 
 .card a {
     text-decoration: none;
     color: inherit;
-    max-height: 378px;
     border-radius: 10px;
+}
+
+.movie-card a {
+    height: 398px;
+}
+
+.album-card a {
+    height: 338px;
 }
 
 .card a:hover {
@@ -151,7 +190,36 @@ body {
     width: 250px;
 }
 
+td .admin-btns {
+    display: flex;
+    flex-direction: column;
+}
+
+td .admin-btns a {
+    margin-top: 10px;
+}
+
+.details-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.resizable-input {
+    resize: vertical;
+    overflow: auto;
+}
+
+
 @media (max-width: 792px) {
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
     .featured-group {
         flex-direction: column;
     }
@@ -163,5 +231,14 @@ body {
     .featured-img-box {
         width: 90%;
         justify-content: center;
+    }
+
+    .featured-img {
+
+        height: 300px;
+    }
+
+    .card {
+        margin: 30px;
     }
 }

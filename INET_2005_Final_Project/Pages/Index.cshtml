@@ -6,12 +6,12 @@
 }
 
 <div class="col-md-12 container">
-    <div class="row featured-group banner-dimension">
+    <div class="row featured-group banner-dimension elevated">
         <div class=" featured-info">
             <h1>Featured Product</h1>
             <h2>@Model.randProduct.ProductName</h2>
             <p>@Model.randProduct.Description</p>
-            <a asp-page="Details" asp-route-id="@Model.randProduct.ProductId" class="featured-btn">Details</a>
+            <a asp-page="Details" asp-route-id="@Model.randProduct.ProductId" class="featured-btn palette-yellow">Details</a>
         </div>
         <div class="featured-img-box">
             <img src="@featuredImage" class="featured-img" alt="Featured product image"
@@ -26,11 +26,11 @@
         {
             string imagePath = "/photos/" + item.FileName;
             <div class="col-md-2">
-                <div class="card">
+                <div class="card movie-card">
                     <a asp-page="Details" asp-route-id="@item.ProductId">
                         <img src="@imagePath" class="card-img-top" alt="Card media image">
                         <div class="card-body">
-                            <h5>@item.ProductName</h5>
+                            <p>@item.ProductName</p>
                             <p>$@item.Price</p>
                         </div>
                     </a>
@@ -45,11 +45,11 @@
         {
             string imagePath = "/photos/" + item.FileName;
             <div class="col-md-2">
-                <div class="card">
+                <div class="card album-card">
                     <a asp-page="Details" asp-route-id="@item.ProductId">
                         <img src="@imagePath" class="card-img-top" alt="Card media image">
                         <div class="card-body">
-                            <h5>@item.ProductName</h5>
+                            <p>@item.ProductName</p>
                             <p>$@item.Price</p>
                         </div>
                     </a>

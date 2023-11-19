@@ -50,18 +50,7 @@ namespace INET_2005_Final_Project.Pages
 
         public IActionResult OnPost()
         {
-            string cart = Request.Cookies["Shopping Cart"];
-
-            if (string.IsNullOrEmpty(cart))
-            {
-                // Initialize the cart if empty
-                Response.Cookies.Append("ShoppingCart", Product.ProductId.ToString());
-            }
-            else
-            {
-                // Add product to existing cart
-                Response.Cookies.Append("ShoppingCart", cart + ", " + Product.ProductId.ToString());
-            }
+            // Sprint 3 - deal with cookie management
 
             return RedirectToPage("/Index");
         }

@@ -2,7 +2,7 @@
 @model INET_2005_Final_Project.Pages.Products.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "AdminIndex";
 }
 
 <h1>Index</h1>
@@ -78,8 +78,11 @@
             @formattedCondition
         </td>
         <td>
-            <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-primary">Edit</a>
-            <a asp-page="./Delete" asp-route-id="@item.ProductId" class="btn btn-primary">Delete</a>
+            <div class="admin-btns">
+                <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-primary">Edit</a>
+                <a asp-page="./Delete" asp-route-id="@item.ProductId" class="btn btn-primary">Delete</a>
+            </div>
+            
         </td>
     </tr>
 }
