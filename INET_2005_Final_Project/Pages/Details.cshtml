@@ -20,7 +20,7 @@
     }
 }
 <div class="container">
-    <h1 class="text-center text-light">@formattedIsMovie - @Model.Product.ProductName</h1>
+    <h1 class="text-center palette-yellow-text">@Model.Product.ProductName</h1>
 
     <div class="row">
         <div class="col-md-6">
@@ -30,6 +30,11 @@
         <div class="col-md-6 details-text">
             <table class="table">
                 <tbody class="mb-6">
+                    <tr class="tbl-row-group">
+                        <td class="details-item-title">Media Type</td>
+                        <td>@formattedIsMovie</td>
+                    </tr>
+
                     <tr class="tbl-row-group">
                         <td class="details-item-title">Price</td>
                         <td>$@Model.Product.Price</td>

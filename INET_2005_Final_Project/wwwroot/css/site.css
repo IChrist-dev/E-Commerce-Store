@@ -4,18 +4,11 @@ html {
     min-height: 100%;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 body {
-    margin-bottom: 60px;
     font-family: monospace;
 }
 
@@ -65,7 +58,6 @@ p {
     margin-bottom: 0;
 }
 
-/*Home page banner image*/
 .banner {
     z-index: 0;
     object-fit: cover;
@@ -90,6 +82,10 @@ p {
 
 .palette-yellow {
     background: #fca311;
+}
+
+.palette-yellow-text {
+    color: #fca311;
 }
 
 .row .featured-group {
@@ -130,14 +126,14 @@ p {
 .featured-img-box {
     width: 50%;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     justify-content: center;
-    align-content: center;
 }
 
 .featured-img {
     width: max-content;
-    height: 500px;
+    height: auto;
+    max-height: 400px;
     justify-content: center;
     padding: 20px;
 }
@@ -145,6 +141,10 @@ p {
 .description {
     max-width: 300px;
     text-align: justify;
+}
+
+.card-group {
+    display: flex;
 }
 
 .card {
@@ -158,10 +158,11 @@ p {
 }
 
 .album-card {
-    height: 340px;
+    height: 300px;
 }
 
 .card-img-top {
+    display: block;
     border-radius: 10px 10px 0 0;
     width: 100%;
     height: auto;
@@ -171,6 +172,15 @@ p {
     text-decoration: none;
     color: inherit;
     border-radius: 10px;
+}
+
+.card-body {
+    padding: 8px;
+}
+
+.card-body p {
+    font-size: 1rem;
+    white-space: break-spaces;
 }
 
 .movie-card a {
@@ -215,54 +225,124 @@ td .admin-btns a {
     overflow: auto;
 }
 
-
-@media (max-width: 1025px) {
-    h1 {
-        font-size: 3em;
+@media (max-width: 1400px) {
+    .movie-card {
+        height: 350px;
     }
 
-    h2 {
-        font-size: 2em;
+    .album-card {
+        height: 300px;
     }
 
-    .banner-dimension {
-        height: contain;
-        object-fit: cover;
-        object-position: inherit;
-    }    
+    .movie-card a {
+        height: 348px;
+    }
+
+    .album-card a {
+        height: 298px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .card {
+        margin: 15px 0;
+        height: auto;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: auto;
+    }
+
+    .card-body p {
+        font-size: 0.8rem;
+    }
+
+    .movie-card {
+        height: 300px;
+    }
+    
+    .album-card {
+        height: 250px;
+    }
+
+    .movie-card a {
+        height: 298px;
+    }
+    
+    .album-card a {
+        height: 248px;
+    }
+}
+
+@media (max-width: 991px) {
+    .movie-card {
+        height: 220px;
+    }
+
+    .album-card {
+        height: 210px;
+    }
+
+    .movie-card a {
+        height: 218px;
+    }
+
+    .album-card a {
+        height: 208px;
+    }
 }
 
 @media (max-width: 769px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
 
     .banner-dimension {
-        height: 180vh;
-    }
-    
-    .background-fade {
-        background: linear-gradient(rgba(0,0,0,1) 0%, rgba(255,255,255,1) 25%);
-    }
-
-    .featured-group {
-        flex-direction: column;
+        height: 500px;
     }
 
     .featured-info {
-        width: 100%;
+        width: 50%;
     }
 
     .featured-img-box {
-        width: 100%;
+        width: 50%;
         justify-content: center;
         align-items: center;
     }
 
     .featured-img {
-        width: 90%;
+        width: 100%;
         height: auto;
     }
 
-    .card {
-        margin: 30px;
+    .card-group {
+        flex-direction: column;
+    }
+
+    .card-group .row .col-md-2 {
+        width: 100%;
+    }
+
+    .card-body p {
+        font-size: 1.2rem;
+    }
+
+    .movie-card, .album-card {
+        height: auto;
+    }
+
+    .movie-card a, .album-card a {
+        height: auto;
+    }
+
+    .background-fade {
+        background: linear-gradient(rgba(0,0,0,1) 0%, rgba(255,255,255,1) 5%);
     }
 }
 
@@ -276,35 +356,29 @@ td .admin-btns a {
     }
 
     .banner-dimension {
-        height: 180vh;
-    }
-}
-
-@media (max-width: 480px) {
-    .banner-dimension {
-        height: 150vh;
+        height: 350px;
     }
 
     .featured-group {
-        margin: 0;
-        padding: 0;
+        width: 100%;
     }
 
-    .featured-img {
-        
-        padding: 20px;
+    .featured-info h1 {
+        font-size: 1.4rem;
     }
-}
 
-@media (max-width: 450px) {
-    .banner-dimension {
-        height: 140vh;
+    .featured-info h2 {
+        font-size: 1rem;
+    }
+
+    .featured-info p {
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 320px) {
-    .banner-dimension {
-        height: 120vh;
+    .featured-img {
+        padding: 20px 0 0 0;
     }
 
     .tbl-row-group > * {
@@ -318,7 +392,13 @@ td .admin-btns a {
 }
 
 @media (max-width: 250px) {
+    .featured-group {
+        margin: 0;
+    }
+}
+
+@media (max-width: 150px) {
     .banner-dimension {
-        height: 110vh;
+        height: 150px;
     }
 }
