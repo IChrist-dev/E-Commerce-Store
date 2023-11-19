@@ -130,7 +130,7 @@ p {
 .featured-img-box {
     width: 50%;
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     justify-content: center;
     align-content: center;
 }
@@ -205,13 +205,18 @@ td .admin-btns a {
     justify-content: space-evenly;
 }
 
+.details-item-title {
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
 .resizable-input {
     resize: vertical;
     overflow: auto;
 }
 
 
-@media (max-width: 792px) {
+@media (max-width: 1025px) {
     h1 {
         font-size: 3em;
     }
@@ -220,25 +225,100 @@ td .admin-btns a {
         font-size: 2em;
     }
 
+    .banner-dimension {
+        height: contain;
+        object-fit: cover;
+        object-position: inherit;
+    }    
+}
+
+@media (max-width: 769px) {
+
+    .banner-dimension {
+        height: 180vh;
+    }
+    
+    .background-fade {
+        background: linear-gradient(rgba(0,0,0,1) 0%, rgba(255,255,255,1) 25%);
+    }
+
     .featured-group {
         flex-direction: column;
     }
 
     .featured-info {
-        width: 90%;
+        width: 100%;
     }
 
     .featured-img-box {
-        width: 90%;
+        width: 100%;
         justify-content: center;
+        align-items: center;
     }
 
     .featured-img {
-
-        height: 300px;
+        width: 90%;
+        height: auto;
     }
 
     .card {
         margin: 30px;
+    }
+}
+
+@media (max-width: 575px) {
+    .nav-btn {
+        width: auto;
+        margin: 10px 0;
+        padding: 10px 15px;
+        text-align: center;
+        font-size: larger;
+    }
+
+    .banner-dimension {
+        height: 180vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-dimension {
+        height: 150vh;
+    }
+
+    .featured-group {
+        margin: 0;
+        padding: 0;
+    }
+
+    .featured-img {
+        
+        padding: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    .banner-dimension {
+        height: 140vh;
+    }
+}
+
+@media (max-width: 320px) {
+    .banner-dimension {
+        height: 120vh;
+    }
+
+    .tbl-row-group > * {
+        display: block;
+    }
+
+    .details-btns > * {
+        margin: 5px 0;
+        width: 75%;
+    }
+}
+
+@media (max-width: 250px) {
+    .banner-dimension {
+        height: 110vh;
     }
 }
