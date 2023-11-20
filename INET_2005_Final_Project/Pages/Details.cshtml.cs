@@ -11,9 +11,13 @@ namespace INET_2005_Final_Project.Pages
         private readonly ILogger<DetailsModel> _logger;
         private readonly INET_2005_Final_ProjectContext _context;
 
+        [BindProperty]
         public Product Product { get; set; } = default!;
 
         public List<string> ConditionList { get; set; } = new();
+
+        public bool addedToCart { get; set; } = false;
+        public string returnMessage { get; set; } = string.Empty;
 
         public DetailsModel(ILogger<DetailsModel> logger, INET_2005_Final_ProjectContext context)
         {
@@ -48,11 +52,26 @@ namespace INET_2005_Final_Project.Pages
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int? id)
         {
-            // Sprint 3 - deal with cookie management
+            // Adding to Cookie
+            string? cart = Request.Cookies["ProductCart"];
 
-            return RedirectToPage("/Index");
+            if (string.IsNullOrEmpty(cart))
+            {
+                // Cart is empty, initialize it
+                Response.Cookies.Append("ProductCart", Product.ProductId.ToString());
+            }
+            else
+            {
+                // Add product to existing cart
+                Response.Cookies.Append("ProductCart", cart + "," + Product.ProductId.ToString());
+            }
+
+            returnMessage = Product.ProductName + " has been added to your cart.";
+            addedToCart = true;
+
+            return Page();
         }
     }
 }

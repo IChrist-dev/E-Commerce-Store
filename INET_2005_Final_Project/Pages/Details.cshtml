@@ -58,11 +58,48 @@
             </table>
 
             <form method="post" class="text-center">
+                <input type="hidden" asp-for="Product.ProductId" />
+                <input type="hidden" asp-for="Product.ProductName" />
+                <input type="hidden" asp-for="Product.FileName" />
+                <input type="hidden" asp-for="Product.Price" />
+                <input type="hidden" asp-for="Product.Description" />
+                <input type="hidden" asp-for="Product.isMovie" />
+                <input type="hidden" asp-for="Product.Runtime" />
+                <input type="hidden" asp-for="Product.Condition" />
                 <div class="details-btns">
-                    <input type="submit" value="Add to Cart" class="btn palette-yellow" />
+                    <input type="submit" value="Add to Cart" class="btn palette-yellow" data-bs-toggle="modal" data-bs-target="addCartModal" />
                     <a asp-page="./Index" class="btn btn-dark">Continue Shopping</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<div class="row container text-center">
+    @if (Model.addedToCart)
+    {
+        <p>@Model.returnMessage</p>
+
+        <div class="details-btns">
+            <a asp-page="/Checkout" class="btn palette-yellow">Checkout</a>
+            <a asp-page="/Index" class="btn btn-dark">Continue Shopping</a>
+        </div>
+    }
+</div>
+
+@* 
+<div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-x1">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div id="modal-message">@Model.returnMessage</div>
+
+                <div class="details-btns">
+                    <a asp-page="/ShoppingCart" class="btn palette-yellow" />
+                    <a asp-page="/Index" class="btn btn-dark">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ *@
