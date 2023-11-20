@@ -3,6 +3,18 @@
 @{
     ViewData["Title"] = "Home";
     string featuredImage = "/photos/" + Model.randProduct.FileName;
+
+    string formattedDescription;
+
+    if (Model.randProduct.Description.Length >= 150)
+    {
+        formattedDescription = Model.randProduct.Description.Substring(0, 147);
+        formattedDescription += "...";
+    }
+    else
+    {
+        formattedDescription = Model.randProduct.Description;
+    }
 }
 
 <div class="col-md-12 container">
@@ -10,7 +22,7 @@
         <div class="featured-info">
             <h1>Featured Product</h1>
             <h2>@Model.randProduct.ProductName</h2>
-            <p>@Model.randProduct.Description</p>
+            <p>@formattedDescription</p>
             <a asp-page="Details" asp-route-id="@Model.randProduct.ProductId" class="featured-btn palette-yellow">Details</a>
         </div>
         <div class="featured-img-box">

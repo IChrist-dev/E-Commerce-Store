@@ -377,6 +377,20 @@ td .admin-btns a {
 }
 
 @media (max-width: 320px) {
+    .background-fade .container {
+        width: 100%;
+    }
+
+    .featured-group {
+        margin-left: 0;
+    }
+
+    .featured-info {
+        max-height: 350px;
+        padding: 10px 0 0 0;
+        justify-content: start;
+    }
+
     .featured-img {
         padding: 20px 0 0 0;
     }
