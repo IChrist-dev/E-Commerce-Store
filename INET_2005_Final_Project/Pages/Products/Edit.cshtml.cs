@@ -57,7 +57,7 @@ namespace INET_2005_Final_Project.Pages.Products
                 return NotFound();
             }
 
-            var product =  await _context.Product.FirstOrDefaultAsync(m => m.ProductId == id);
+            var product = await _context.Product.FirstOrDefaultAsync(m => m.ProductId == id);
             if (product == null)
             {
                 return NotFound();

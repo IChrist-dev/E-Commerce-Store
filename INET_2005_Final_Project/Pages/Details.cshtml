@@ -10,15 +10,10 @@
 
     // Render a more readible boolean value
     string formattedIsMovie;
-    if (Model.Product.isMovie)
-    {
-        formattedIsMovie = "Movie";
-    }
-    else
-    {
-        formattedIsMovie = "Album";
-    }
+    if (Model.Product.isMovie) formattedIsMovie = "Movie";
+    else formattedIsMovie = "Album";
 }
+
 <div class="container">
     <h1 class="text-center palette-yellow-text">@Model.Product.ProductName</h1>
 
@@ -67,39 +62,10 @@
                 <input type="hidden" asp-for="Product.Runtime" />
                 <input type="hidden" asp-for="Product.Condition" />
                 <div class="details-btns">
-                    <input type="submit" value="Add to Cart" class="btn palette-yellow" data-bs-toggle="modal" data-bs-target="addCartModal" />
+                    <input type="submit" value="Add to Cart" class="btn palette-yellow" />
                     <a asp-page="./Index" class="btn btn-dark">Continue Shopping</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-<div class="row container text-center">
-    @if (Model.addedToCart)
-    {
-        <p>@Model.returnMessage</p>
-
-        <div class="details-btns">
-            <a asp-page="/Checkout" class="btn palette-yellow">Checkout</a>
-            <a asp-page="/Index" class="btn btn-dark">Continue Shopping</a>
-        </div>
-    }
-</div>
-
-@* 
-<div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCartModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-x1">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <div id="modal-message">@Model.returnMessage</div>
-
-                <div class="details-btns">
-                    <a asp-page="/ShoppingCart" class="btn palette-yellow" />
-                    <a asp-page="/Index" class="btn btn-dark">Continue Shopping</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
- *@

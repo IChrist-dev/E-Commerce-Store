@@ -54,6 +54,25 @@ p {
     color: #fca311;
 }
 
+#shoppingCartWidget {
+    text-decoration: none;
+}
+
+#shoppingCartWidget i {
+
+}
+
+#cartProductCount {
+    position: absolute;
+    background: #fca311;
+    border-radius: 50%;
+    padding: 2px;
+    width: 25px;
+    height: 25px;
+    color: white;
+    text-align: center;
+}
+
 .mb-3 {
     margin-bottom: 0;
 }

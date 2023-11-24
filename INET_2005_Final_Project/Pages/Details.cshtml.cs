@@ -16,9 +16,6 @@ namespace INET_2005_Final_Project.Pages
 
         public List<string> ConditionList { get; set; } = new();
 
-        public bool addedToCart { get; set; } = false;
-        public string returnMessage { get; set; } = string.Empty;
-
         public DetailsModel(ILogger<DetailsModel> logger, INET_2005_Final_ProjectContext context)
         {
             _logger = logger;
@@ -60,18 +57,22 @@ namespace INET_2005_Final_Project.Pages
             if (string.IsNullOrEmpty(cart))
             {
                 // Cart is empty, initialize it
-                Response.Cookies.Append("ProductCart", Product.ProductId.ToString());
+                Response.Cookies.Append("ProductCart", Product.ProductId.ToString(), new CookieOptions
+                {
+                    Expires = DateTime.Now.AddHours(24)
+                });
+                
             }
             else
             {
-                // Add product to existing cart
-                Response.Cookies.Append("ProductCart", cart + "," + Product.ProductId.ToString());
+                // Add product to existing cart and update expiration counter
+                Response.Cookies.Append("ProductCart", cart + "," + Product.ProductId.ToString(), new CookieOptions
+                {
+                    Expires = DateTime.Now.AddHours(24)
+                });
             }
 
-            returnMessage = Product.ProductName + " has been added to your cart.";
-            addedToCart = true;
-
-            return Page();
+            return RedirectToPage("/Index");
         }
     }
 }

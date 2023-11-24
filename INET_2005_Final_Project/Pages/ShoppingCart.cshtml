@@ -1,4 +1,97 @@
 ﻿@page
 @model INET_2005_Final_Project.Pages.ShoppingCartModel
 @{
+    ViewData["Title"] = "ShoppingCart";
+
+    double cartSubtotal = 0;
+}
+
+<h1>Shopping Cart</h1>
+
+
+
+@if (!Model.emptyCart)
+{
+    <div class="col-md-10">
+        <table class="table">
+            <tbody>
+                @foreach (var item in Model.productCart)
+                {
+                    string imagePath = "/photos/" + item.FileName;
+                    string formattedIsMovie;
+                    if (item.isMovie) formattedIsMovie = "Movie";
+                    else formattedIsMovie = "Album";
+
+                    // Calculate price based on number of occurances of item's ID
+                    int unitCount = Model.productQuantities[item.ProductId];
+                    double totalPrice = (double)item.Price * unitCount;
+
+                    // Increment the sub-total
+                    cartSubtotal += totalPrice;
+                    <tr>
+                        <td>
+                            <a asp-page="Details" asp-route-id="@item.ProductId">
+                                <img src="@imagePath" class="img-fluid thumbnail" alt="Product photo">
+                            </a>
+                        </td>
+                        <td>
+                            <h3>@item.ProductName - @formattedIsMovie</h3>
+                        </td>
+                        <td>
+                            <p>Quantity: @unitCount</p>
+                            <p>Unit Price: $@item.Price</p>
+                            <p>Total: $@totalPrice</p>
+                        </td>
+                    </tr>
+                }
+
+                <tr>
+                    <td></td>
+                    <td>Sub-total:</td>
+                    <td>$@cartSubtotal</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Delivery charge:</td>
+                    <td>$10.00</td>
+                </tr>
+                <tr>
+                    @{
+                        double taxPortion = (cartSubtotal + 10) * 0.15;
+                        string formattedTax = taxPortion.ToString("0.00");
+                    }
+                    <td></td>
+                    <td>Tax:</td>
+                    <td>$@formattedTax</td>
+                </tr>
+                <tr>
+                    @{
+                        double totalOrder = (cartSubtotal + 10) + taxPortion;
+                        string formattedTotal = totalOrder.ToString("0.00");
+                    }
+                    <td></td>
+                    <td>Total:</td>
+                    <td>$@formattedTotal</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form method="post" class="text-center">
+        <div class="container">
+            <div class="details-btns">
+                <input type="submit" value="Checkout" class="btn palette-yellow" />
+            </div>
+        </div>
+    </form>
+}
+
+@if (Model.emptyCart)
+{
+    <div class="container text-center">
+        <p>Your cart is empty</p>
+        <div class="details-btns">
+            <a asp-page="./Index" class="btn btn-dark">Shop</a>
+        </div>
+    </div>
 }
