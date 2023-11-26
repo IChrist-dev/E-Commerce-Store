@@ -8,8 +8,6 @@
 
 <h1>Shopping Cart</h1>
 
-
-
 @if (!Model.emptyCart)
 {
     <div class="col-md-10">
@@ -25,30 +23,35 @@
                     // Calculate price based on number of occurances of item's ID
                     int unitCount = Model.productQuantities[item.ProductId];
                     double totalPrice = (double)item.Price * unitCount;
+                    string formattedTotalPrice = totalPrice.ToString("0.00");
 
                     // Increment the sub-total
                     cartSubtotal += totalPrice;
                     <tr>
-                        <td>
+                        <td class="cart-image">
                             <a asp-page="Details" asp-route-id="@item.ProductId">
                                 <img src="@imagePath" class="img-fluid thumbnail" alt="Product photo">
                             </a>
                         </td>
-                        <td>
-                            <h3>@item.ProductName - @formattedIsMovie</h3>
+                        <td class ="cart-item-title">
+                            <h3>@item.ProductName</h3>
+                            <p>@formattedIsMovie</p>
                         </td>
-                        <td>
+                        <td class="cart-item-price">
                             <p>Quantity: @unitCount</p>
                             <p>Unit Price: $@item.Price</p>
-                            <p>Total: $@totalPrice</p>
+                            <p>Total: $@formattedTotalPrice</p>
                         </td>
                     </tr>
                 }
 
+                @{
+                    string formattedCartSubtotal = cartSubtotal.ToString("0.00");
+                }
                 <tr>
                     <td></td>
                     <td>Sub-total:</td>
-                    <td>$@cartSubtotal</td>
+                    <td>$@formattedCartSubtotal</td>
                 </tr>
                 <tr>
                     <td></td>

@@ -54,12 +54,17 @@ p {
     color: #fca311;
 }
 
-#shoppingCartWidget {
+#shopping-Cart-Widget {
     text-decoration: none;
+    margin-left: 20px;
 }
 
-#shoppingCartWidget i {
+#shopping-Cart-Widget i {
+    transition: transform 0.2s;
+}
 
+#shopping-Cart-Widget i:hover {
+    transform: rotate(30deg);
 }
 
 #cartProductCount {
@@ -363,6 +368,20 @@ td .admin-btns a {
     .background-fade {
         background: linear-gradient(rgba(0,0,0,1) 0%, rgba(255,255,255,1) 5%);
     }
+
+    .table {
+        width: 100%;
+    }
+
+    .details-btns input {
+        width: 100%;
+    }
+
+    .details-btns a {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+    }
 }
 
 @media (max-width: 575px) {
@@ -383,7 +402,7 @@ td .admin-btns a {
     }
 
     .featured-info h1 {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
 
     .featured-info h2 {
@@ -391,6 +410,18 @@ td .admin-btns a {
     }
 
     .featured-info p {
+        font-size: 0.9rem;
+    }
+
+    .cart-image {
+        width: 30%;
+    }
+
+    .cart-item-title h3 {
+        font-size: 1.1rem;
+    }
+
+    .cart-item-price p, cart-item-title p {
         font-size: 0.9rem;
     }
 }
@@ -421,6 +452,11 @@ td .admin-btns a {
     .details-btns > * {
         margin: 5px 0;
         width: 75%;
+    }
+
+    .details-btns input,
+    .details-btns a {
+        font-size: 14px;
     }
 }
 
