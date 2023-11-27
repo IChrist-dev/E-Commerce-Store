@@ -27,7 +27,7 @@ namespace INET_2005_Final_Project.Pages
         {
             string cartList = Request.Cookies["ProductCart"];
 
-            if (cartList != null) { 
+            if (cartList != null) {
                 // Delimit ProductCart cookie string
                 string[] cartListSplit = cartList.Split(',');
                 
