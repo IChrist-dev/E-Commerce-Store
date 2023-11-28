@@ -5,8 +5,16 @@ namespace INET_2005_Final_Project.Pages
 {
     public class ConfirmationModel : PageModel
     {
-        public void OnGet()
+        public string confirmMessage { get; set; } = string.Empty;
+
+        public IActionResult OnGet()
         {
+            if (TempData.ContainsKey("ConfirmCode"))
+            {
+                confirmMessage = TempData["ConfirmCode"] as string;
+            }
+
+            return Page();
         }
     }
 }

@@ -1,7 +1,15 @@
 using INET_2005_Final_Project.Data;
+using INET_2005_Final_Project.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis.Razor;
+using Microsoft.IdentityModel.Tokens;
+using System.Data;
+using System.Net;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace INET_2005_Final_Project.Pages
 {
@@ -11,34 +19,9 @@ namespace INET_2005_Final_Project.Pages
         private readonly INET_2005_Final_ProjectContext _context;
 
         [BindProperty]
-        public string name { get; set; } = string.Empty;
+        public APIContent apiContent { get; set; } = default!;
 
-        [BindProperty]
-        public string address { get; set; } = string.Empty;
-
-        [BindProperty]
-        public string city { get; set; } = string.Empty;
-
-        [BindProperty]
-        public string province { get; set; } = string.Empty;
-
-        [BindProperty]
-        public string postalCode{ get; set; } = string.Empty;
-
-        [BindProperty]
-        public string country { get; set; } = string.Empty;
-
-        [BindProperty]
-        public long ccNumber { get; set; }
-
-        [BindProperty]
-        public string ccExpiryDate { get; set; } = string.Empty;
-
-        [BindProperty]
-        public int cvv { get; set; }
-
-        public string productsList { get; set; } = string.Empty;
-
+        public string validationMessage { get; set; } = string.Empty;
         public CheckoutModel(ILogger<CheckoutModel> logger, INET_2005_Final_ProjectContext context)
         {
             _logger = logger;
@@ -47,31 +30,66 @@ namespace INET_2005_Final_Project.Pages
 
         public IActionResult OnGet()
         {
+            string? cart = Request.Cookies["ProductCart"];
+
+            if (cart.IsNullOrEmpty())
+            {
+                validationMessage = "Your shopping cart is empty. Please select products from the home page.";
+                
+            }
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            productsList = Request.Cookies["ProductCart"];
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            // Set the list of products from cookie
+            string? cart = Request.Cookies["ProductCart"];
+            apiContent.products = Request.Cookies["ProductCart"]!;
+
+            // Validate apiContent data
+            if (apiContent.ccNumber.ToString().Length != 16)
+            {
+                validationMessage = "Your credit card must contain 16 digits";
+                return Page();
+            }
+
+            Regex ccExpiryRegex = new Regex(@"^\d{4}$");
+            if (!ccExpiryRegex.IsMatch(apiContent.ccExpiryDate))
+            {
+                validationMessage = "Your credit card expiration must be in the format [MMYY]";
+                return Page();
+            }
+
+            if (apiContent.cvv.ToString().Length != 3)
+            {
+                validationMessage = "Your CVV must be 3 digits long";
+                return Page();
+            }
 
             string apiURL = "https://nscc-inet2005-purchase-api.azurewebsites.net/purchase";
-
             HttpClient client = new HttpClient();
 
-            // This looks promising: https://learn.microsoft.com/en-us/answers/questions/1180617/send-a-request-to-a-restapi-with-json
+            string dataAsJson = JsonSerializer.Serialize(apiContent);
+            var callContent = new StringContent(dataAsJson, Encoding.UTF8, "application/json");
 
-            // For debugging
-            //_logger.Log(LogLevel.Information, "Checkout content:\n" +
-            //    name + "\n" +
-            //    address + "\n" +
-            //    city + "\n" +
-            //    province + "\n" +
-            //    postalCode + "\n" +
-            //    country + "\n" +
-            //    ccNumber + "\n" +
-            //    ccExpiryDate + "\n" +
-            //    cvv + "\n" +
-            //    productsList);
+            // Make API call
+            var response = await client.PostAsync(apiURL, callContent);
+            string responseContent = await response.Content.ReadAsStringAsync();
+            
+            // If reached, successful API response
+            // Cookie can be deleted by expiring prematurely
+            Response.Cookies.Append("ProductCart", "", new CookieOptions
+            {
+                Expires = DateTime.Now.AddHours(-1)
+            });
+
+            // Save the response code to make accessible on Confirmation page
+            TempData["ConfirmCode"] = responseContent;
 
             return RedirectToPage("/Confirmation");
         }

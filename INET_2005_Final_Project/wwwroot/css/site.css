@@ -315,6 +315,10 @@ td .admin-btns a {
     .album-card a {
         height: 208px;
     }
+
+    .details-btns > * {
+        margin-bottom: 10px;
+    }
 }
 
 @media (max-width: 769px) {

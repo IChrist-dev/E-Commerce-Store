@@ -11,7 +11,9 @@ function getCartProductCount() {
         .split('=')[1];
 
     var cartItems = cookieContent.split('%2C');
-    return cartItems.length;
+
+    if (cartItems[0] == "") return 0;
+    else return cartItems.length;
 }
 
 // Function to update the shopping cart icon number

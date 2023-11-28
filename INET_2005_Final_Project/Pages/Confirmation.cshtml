@@ -2,3 +2,28 @@
 @model INET_2005_Final_Project.Pages.ConfirmationModel
 @{
 }
+
+<br /><br />
+
+@if (Model.confirmMessage != null)
+{
+    <div class="col-md-12 text-center">
+        <h1>Order Confirmed</h1>
+        <p><b>Confirmation Code:</b> @Model.confirmMessage</p>
+        <p>Please save this information for your records. Your order will ship soon!</p>
+
+        <div class="details-btns">
+            <a asp-page="./Index" class="btn btn-dark">Shop</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="col-md-12 text-center">
+        <h1>Oops! Something went wrong</h1>
+        <p>There was an error submitting your details.</p>
+        <div class="details-btns">
+            <a asp-page="./Index" class="btn btn-dark">Shop</a>
+        </div>
+    </div>
+}
