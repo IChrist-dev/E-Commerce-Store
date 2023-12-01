@@ -5,7 +5,7 @@
 
 <br /><br />
 
-@if (Model.confirmMessage != null)
+@if (Model.confirmMessage != string.Empty)
 {
     <div class="col-md-12 text-center">
         <h1>Order Confirmed</h1>
@@ -13,7 +13,7 @@
         <p>Please save this information for your records. Your order will ship soon!</p>
 
         <div class="details-btns">
-            <a asp-page="./Index" class="btn btn-dark">Shop</a>
+            <a asp-page="./Index" class="btn btn-dark">Continue Shopping</a>
         </div>
     </div>
 }

@@ -15,21 +15,20 @@ namespace INET_2005_Final_Project.Pages.Products
     [Authorize]
     public class EditModel : PageModel
     {
+        private readonly ILogger<EditModel> _logger;
         private readonly INET_2005_Final_ProjectContext _context;
         IWebHostEnvironment _env;
 
         [BindProperty]
         public Product Product { get; set; } = default!;
-
         [BindProperty]
         public IFormFile? ImageUpload { get; set; } = null!;
-
         public List<string> ConditionList { get; set; } = new();
-
         public List<SelectListItem> SelectConditionList { get; set; } = new();
 
-        public EditModel(INET_2005_Final_ProjectContext context, IWebHostEnvironment env)
+        public EditModel(INET_2005_Final_ProjectContext context, IWebHostEnvironment env, ILogger<EditModel> logger)
         {
+            _logger = logger;
             _context = context;
             _env = env;
 
@@ -48,10 +47,13 @@ namespace INET_2005_Final_Project.Pages.Products
                     Text = ConditionList[i]
                 });
             }
+            _logger = logger;
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            _logger.Log(LogLevel.Information, "Edit OnGet reached");
+
             if (id == null || _context.Product == null)
             {
                 return NotFound();
@@ -70,6 +72,8 @@ namespace INET_2005_Final_Project.Pages.Products
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            _logger.Log(LogLevel.Information, "Edit OnPost reached");
+
             if (!ModelState.IsValid)
             {
                 return Page();

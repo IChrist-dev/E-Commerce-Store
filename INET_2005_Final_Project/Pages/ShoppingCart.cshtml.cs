@@ -25,6 +25,8 @@ namespace INET_2005_Final_Project.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
+            _logger.Log(LogLevel.Information, "Shopping Cart OnGet reached");
+
             string cartList = Request.Cookies["ProductCart"];
 
             if (cartList != null) {
@@ -68,7 +70,6 @@ namespace INET_2005_Final_Project.Pages
 
         public IActionResult OnPost()
         {
-            // Stubbed until sprint 4
             return RedirectToPage("/Checkout");
         }
     }

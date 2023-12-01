@@ -14,21 +14,20 @@ namespace INET_2005_Final_Project.Pages.Products
     [Authorize]
     public class CreateModel : PageModel
     {
+        private readonly ILogger<CreateModel> _logger;
         private readonly INET_2005_Final_ProjectContext _context;
         IWebHostEnvironment _env;
 
         [BindProperty]
         public Product Product { get; set; } = default!;
-
         [BindProperty]
         public IFormFile ImageUpload { get; set; } = null!;
-
         public List<string> ConditionList { get; set; } = new();
-
         public List<SelectListItem> SelectConditionList { get; set; } = new();
 
-        public CreateModel(INET_2005_Final_ProjectContext context, IWebHostEnvironment env)
+        public CreateModel(INET_2005_Final_ProjectContext context, IWebHostEnvironment env, ILogger<CreateModel> logger)
         {
+            _logger = logger;
             _context = context;
             _env = env;
 
@@ -47,10 +46,12 @@ namespace INET_2005_Final_Project.Pages.Products
                     Text = ConditionList[i]
                 });
             }
+            _logger = logger;
         }
 
         public IActionResult OnGet()
         {
+            _logger.Log(LogLevel.Information, "Create OnGet reached");
             return Page();
         }
        
@@ -58,6 +59,8 @@ namespace INET_2005_Final_Project.Pages.Products
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            _logger.Log(LogLevel.Information, "Create OnPost reached");
+
             // Make a unique image name and set for product
             string imageName = DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss-") + ImageUpload.FileName;
 

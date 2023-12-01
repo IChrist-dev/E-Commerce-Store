@@ -10,25 +10,29 @@ namespace INET_2005_Final_Project.Pages.Admin
 {
     public class LoginModel : PageModel
     {
-        private readonly INET_2005_Final_ProjectContext _context;
+        private readonly ILogger<LoginModel> _logger;
 
         [BindProperty]
         public string Username { get; set; } = string.Empty;
-
         [BindProperty]
         public string Password { get; set; } = string.Empty;
 
-        public LoginModel(INET_2005_Final_ProjectContext context)
+        public LoginModel(ILogger<LoginModel> logger)
         {
-            _context = context;
+            _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            _logger.Log(LogLevel.Information, "Login OnGet reached");
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPost()
         {
+            _logger.Log(LogLevel.Information, "Login OnPost reached");
+
             // Hard coded password and username check; should use full validation longterm
             string validUsername = "admin";
             string validPassword = "admin";

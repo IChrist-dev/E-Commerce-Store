@@ -31,6 +31,8 @@ namespace INET_2005_Final_Project.Pages
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            _logger.Log(LogLevel.Information, "Details OnGet reached");
+
             if (id == null || _context.Product == null)
             {
                 return NotFound();
@@ -51,6 +53,8 @@ namespace INET_2005_Final_Project.Pages
 
         public IActionResult OnPost(int? id)
         {
+            _logger.Log(LogLevel.Information, "Details OnPost reached");
+
             // Adding to Cookie
             string? cart = Request.Cookies["ProductCart"];
 

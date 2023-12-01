@@ -30,6 +30,8 @@ namespace INET_2005_Final_Project.Pages
 
         public IActionResult OnGet()
         {
+            _logger.Log(LogLevel.Information, "Checkout OnGet reached");
+
             string? cart = Request.Cookies["ProductCart"];
 
             if (cart.IsNullOrEmpty())
@@ -42,6 +44,8 @@ namespace INET_2005_Final_Project.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
+            _logger.Log(LogLevel.Information, "Checkout OnPost reached");
+
             if (!ModelState.IsValid)
             {
                 return Page();

@@ -14,18 +14,22 @@ namespace INET_2005_Final_Project.Pages.Products
     [Authorize]
     public class DeleteModel : PageModel
     {
+        private readonly ILogger<DeleteModel> _logger;
         private readonly INET_2005_Final_ProjectContext _context;
 
         [BindProperty]
         public Product Product { get; set; } = default!;
 
-        public DeleteModel(INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext context)
+        public DeleteModel(INET_2005_Final_Project.Data.INET_2005_Final_ProjectContext context, ILogger<DeleteModel> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            _logger.Log(LogLevel.Information, "Delete OnGet reached");
+
             if (id == null || _context.Product == null)
             {
                 return NotFound();
@@ -46,6 +50,8 @@ namespace INET_2005_Final_Project.Pages.Products
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
+            _logger.Log(LogLevel.Information, "Delete OnPost reached");
+
             if (id == null || _context.Product == null)
             {
                 return NotFound();

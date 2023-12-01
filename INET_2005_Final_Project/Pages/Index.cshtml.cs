@@ -25,6 +25,8 @@ namespace INET_2005_Final_Project.Pages
 
         public void OnGet()
         {
+            _logger.Log(LogLevel.Information, "Primary Index OnGet reached");
+
             // Populate list of products from DB for homepage display
             if (_context.Product != null)
             {
