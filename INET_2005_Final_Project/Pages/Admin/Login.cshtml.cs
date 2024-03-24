@@ -33,7 +33,7 @@ namespace INET_2005_Final_Project.Pages.Admin
         {
             _logger.Log(LogLevel.Information, "Login OnPost reached");
 
-            // Hard coded password and username check; should use full validation longterm
+            // Hard coded for app testing. TODO: Encrypt with BCrypt and move valid creds to table in DB
             string validUsername = "admin";
             string validPassword = "admin";
 
